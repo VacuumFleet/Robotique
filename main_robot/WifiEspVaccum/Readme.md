@@ -7,6 +7,8 @@ A utiliser avec module wifi esp8266 et adapteur wifi esp01
 
 ## Explication
 
+Librairie utilisée : WiFiEsp
+
 Les fonctions se trouvent dans :
 
 WifiEspVaccum.ccp
