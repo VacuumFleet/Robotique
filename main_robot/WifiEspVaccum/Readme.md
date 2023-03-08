@@ -18,6 +18,14 @@ Tous les autres fichiers (y compris dans le dossier utility) sont necessaires
 
 ## Exemple d'utilisation à mettre dans le main
 
+Placer le dossier "WifiEspVaccum" dans le sous dossier arduino "librairies"
+
+Dans Arduino IDE :
+
+1. Cliquer sur Croquis
+2. Inclure une bibliothèque
+3. choisir WifiEspVaccum
+
 `#include <WifiEspVaccum.h> `
 
 `void setup() {`
