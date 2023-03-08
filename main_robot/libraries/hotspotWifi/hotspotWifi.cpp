@@ -17,14 +17,9 @@
 */
 
 
-// Emulate Serial1 on pins 6/7 if not present
-#ifndef HAVE_HWSERIAL1
-#include "SoftwareSerial.h"
-SoftwareSerial Serial1(6, 7); // RX, TX
-#endif
 
-char ssid[] = "TwimEsp";         // your network SSID (name)
-char pass[] = "12345678";        // your network password
+
+
 int status = WL_IDLE_STATUS;     // the Wifi radio's status
 int reqCount = 0;                // number of requests received
 
@@ -33,11 +28,23 @@ WiFiEspServer server(80);
 // use a ring buffer to increase speed and reduce memory allocation
 RingBuffer buf(8);
 
-void setupHotspot()
+void setupHotspot(String ssidName, String ssidPassword, int rx, int tx)
 {
+  #ifndef HAVE_HWSERIAL1
+#include "SoftwareSerial.h"
+  SoftwareSerial Serial1(rx, tx); // RX, TX
+#endif
+
+
   Serial.begin(115200);   // initialize serial for debugging
   Serial1.begin(9600);    // initialize serial for ESP module
   WiFi.init(&Serial1);    // initialize ESP module
+
+    char ssid[ssidName.length() + 1];
+  char pass[ssidPassword.length() + 1];
+
+  ssidName.toCharArray(ssid, ssidName.length() + 1);
+  ssidPassword.toCharArray(pass, ssidPassword.length() + 1);
 
   // check for the presence of the shield
   if (WiFi.status() == WL_NO_SHIELD) {
@@ -46,7 +53,14 @@ void setupHotspot()
   }
 
   Serial.print("Attempting to start AP ");
+ Serial.println("ssid = ");
   Serial.println(ssid);
+  Serial.println("pass = ");
+  Serial.println(pass);
+  Serial.println("rx = ");
+  Serial.println(rx);
+  Serial.println("tx = ");
+  Serial.println(tx);
 
   // uncomment these two lines if you want to set the IP address of the AP
   //IPAddress localIp(192, 168, 111, 111);

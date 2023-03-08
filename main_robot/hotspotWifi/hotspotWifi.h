@@ -1,3 +1,0 @@
-
-void setupHotspot();
-void hotspotLoop();
