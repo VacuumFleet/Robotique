@@ -1,4 +1,4 @@
-# Librairie Connexion wifi
+# Librairie wifi hotspot
 
 ## Materiel
 
@@ -7,24 +7,30 @@ A utiliser avec module wifi esp8266 et adapteur wifi esp01
 
 ## Explication
 
-Librairie utilisée : WiFiEsp
-
 Les fonctions se trouvent dans :
 
-WifiEspVaccum.ccp
-WifiEspVaccum.h
+hotspotWifi.ccp
+hotspotWifi.h
 
 Tous les autres fichiers (y compris dans le dossier utility) sont necessaires
 
 ## Exemple d'utilisation à mettre dans le main
 
-`#include <WifiEspVaccum.h> `
+Placer le dossier "hotspotWifi" dans le sous dossier arduino "librairies"
+
+Dans Arduino IDE :
+
+1. Cliquer sur Croquis
+2. Inclure une bibliothèque
+3. choisir hotspotWifi
+
+`#include <hotspotWifi.h> `
 
 `void setup() {`
 
-`// setup_wifiEspVaccum(String ssidName, String ssidPassword, int rx, int tx)`
+`// setupHotspot(String ssidName, String ssidPassword, int rx, int tx);`
 
-`setup_wifiEspVaccum("testnewbiblioName","testnewbiblioPass",12,50);`
+`setupHotspot("testnewbiblioName","testnewbiblioPass",12,50);`
 
 `}`
 
@@ -32,6 +38,6 @@ Tous les autres fichiers (y compris dans le dossier utility) sont necessaires
 
 `// put your main code here, to run repeatedly:`
 
-`wifiEspVaccum()`
+`hotspotLoop()`
 
 `}`
