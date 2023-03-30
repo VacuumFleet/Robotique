@@ -153,7 +153,7 @@ void setup() {
   Serial.begin(9600);
 
 
-// définir le ssidName, password, ainsi que rx, tx du module esp01
+  // définir le ssidName, password, ainsi que rx, tx du module esp01
   ssidName = "test";
   ssidPassword = "test";
   rx = 1;
