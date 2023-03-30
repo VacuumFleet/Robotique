@@ -152,14 +152,24 @@ void setup() {
   delay(2000);
   Serial.begin(9600);
 
-  // setupHotspot
-  setupHotspot( ssidName,  ssidPassword,  rx,  tx);
 
-  //setup wifiClient
-  setup_wifiEspVaccum(ssidName,  ssidPassword,  rx,  tx);
+// définir le ssidName, password, ainsi que rx, tx du module esp01
+  ssidName = "test";
+  ssidPassword = "test";
+  rx = 1;
+  tx = 2;
 
   //mettre en mode hotspot
   setIsHotspot(true);
+
+  if (getIsHotspot()) {
+    // setupHotspot
+    setupHotspot( ssidName,  ssidPassword,  rx,  tx);
+  }
+  else {
+    //setup wifiClient
+    setup_wifiEspVaccum(ssidName,  ssidPassword,  rx,  tx);
+  }
 
 }
 
@@ -167,10 +177,10 @@ void loop() {
 
   //si hotspot est activé, lancé la fonction hotspotLoop, sinon lancer wifiEspVaccum(client)
   if (getIsHotspot()) {
-    void hotspotLoop();
+    hotspotLoop();
   }
   else {
-    void wifiEspVaccum();
+    wifiEspVaccum();
   }
   const char res = bluetooth_tick();
   if (res == '1') {
