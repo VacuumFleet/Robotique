@@ -3,7 +3,7 @@
 #include <WiFiEspClient.h>
 #include <WiFiEspServer.h>
 #include <WiFiEspUdp.h>
-#include "lib/wifi_ap.h"
+#include "lib/wifi.h"
 #include "lib/movement.h"
 
 SoftwareSerial Serial1(12, 13); // RX, TX
@@ -27,7 +27,8 @@ void setup()
 
   setup_movement();
 
-  setup_ap("robot-1111", "12345678", &Serial1);
+  init_wifi(&Serial1);
+
   Serial.println("Setup done");
 }
 
