@@ -5,7 +5,7 @@
 #include <WiFiEspClient.h>
 #include <WiFiEspServer.h>
 #include <WiFiEspUdp.h>
-#include "hotspotWifi.h"
+#include "lib/wifi_ap.h"
 
 #define SERVO_PIN 11 // Servomotor
 
@@ -142,38 +142,46 @@ char bluetooth_tick()
 void setup()
 {
   // Motors
-  // pinMode(IN1, OUTPUT);
-  // pinMode(IN2, OUTPUT);
-  // pinMode(IN3, OUTPUT);
-  // pinMode(IN4, OUTPUT);
-  // pinMode(ENA, OUTPUT);
-  // pinMode(ENB, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
 
-  // set_motor_stop();
+  set_motor_stop();
 
-  // // Ultrasonic
-  // pinMode(Trig_PIN, OUTPUT);
-  // pinMode(Echo_PIN, INPUT);
+  // Ultrasonic
+  pinMode(Trig_PIN, OUTPUT);
+  pinMode(Echo_PIN, INPUT);
 
-  // // Servomotor
-  // head.attach(SERVO_PIN);
-  // head.write(90);
+  // Servomotor
+  head.attach(SERVO_PIN);
+  head.write(90);
 
-  Serial.begin(9600); // initialize serial for debugging
+  Serial.begin(115200); // initialize serial for debugging
 
   Serial1.begin(9600); // initialize serial for ESP module
 
-  setupHotspot("robot-1111", "12345678", &Serial1);
+  setup_ap("robot-1111", "12345678", &Serial1);
   Serial.println("Setup done");
 }
 
 void loop()
 {
-  // If data is received on Serial1, print it on Serial
-  // if (Serial1.available())
-  // {
-  //   Serial.write(Serial1.read());
-  // }
+  const char res = bluetooth_tick();
+  if (res == '1')
+  {
+    should_move = true;
+  }
+  else if (res == '0')
+  {
+    should_move = false;
+    set_motor_stop();
+  }
 
-  srvLoop();
+  if (should_move)
+  {
+    movement_tick();
+  }
 }
