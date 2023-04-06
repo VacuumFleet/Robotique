@@ -1,3 +1,9 @@
+/* wifi.cpp
+ *
+ * This file is part of the Epitech Msc2 2023 ESP project.
+ * It contains all the helper functions for the wifi module.
+ */
+
 #include <WiFiEsp.h>
 #include <WiFiEspClient.h>
 #include <WiFiEspServer.h>

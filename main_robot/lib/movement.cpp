@@ -1,7 +1,7 @@
 /* movement.cpp
  *
  * This file is part of the Epitech Msc2 2023 ESP project.
- *
+ * It contains all the functions pertaining to robot movement.
  */
 
 #include <Servo.h>

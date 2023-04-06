@@ -1,3 +1,9 @@
+/* main_robot.ino
+ *
+ * This file is part of the Epitech Msc2 2023 ESP project.
+ * This is the sketch file for the main robot. It handles all the robot logic, wifi configuration as well as movement
+ */
+
 #include <SoftwareSerial.h>
 #include <WiFiEsp.h>
 #include <WiFiEspClient.h>
