@@ -14,17 +14,6 @@
 
 SoftwareSerial Serial1(12, 13); // RX, TX
 
-char bluetooth_tick()
-{
-  char data = 0;
-  if (Serial.available() > 0)
-  {
-    data = Serial.read();
-  }
-
-  return data;
-}
-
 void setup()
 {
   Serial.begin(115200); // initialize serial for debugging
