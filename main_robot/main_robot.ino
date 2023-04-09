@@ -9,8 +9,8 @@
 #include <WiFiEspClient.h>
 #include <WiFiEspServer.h>
 #include <WiFiEspUdp.h>
-#include "lib/wifi.h"
-#include "lib/movement.h"
+#include "wifi.h"
+#include "movement.h"
 
 SoftwareSerial Serial1(12, 13); // RX, TX
 
@@ -23,10 +23,15 @@ void setup()
   setup_movement();
 
   init_wifi(&Serial1);
+  setup_ap("robot-1", "123456789", &Serial1);
+  start_server(8080, &Serial1);
+
+  query_url("192.168.1.24", 8000, "/docs", &Serial1);
 
   Serial.println("Setup done");
 }
 
 void loop()
 {
+  movement_tick();
 }
