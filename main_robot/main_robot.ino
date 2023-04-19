@@ -13,6 +13,8 @@
 #include "movement.h"
 
 SoftwareSerial Serial1(12, 13); // RX, TX
+String serial = "8488B";
+String name = "robot-8488B";
 
 void setup()
 {
@@ -23,10 +25,10 @@ void setup()
   setup_movement();
 
   init_wifi(&Serial1);
-  setup_ap("robot-1", "123456789", &Serial1);
-  start_server(8080, &Serial1);
+  setup_ap(name, "123456789", &Serial1);
+  start_server(8080, &Serial1, serial, name);
 
-  query_url("192.168.1.24", 8000, "/docs", &Serial1);
+  query_url("192.168.1.42", 8000, "/docs", &Serial1);
 
   Serial.println("Setup done");
 }

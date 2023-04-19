@@ -7,5 +7,5 @@
 void init_wifi(Stream *espSerial);
 void setup_ap(String ssidName, String ssidPass, Stream *espSerial);
 void connect_wifi(String ssidName, String ssidPass, Stream *espSerial);
-void start_server(int port, Stream *espSerial);
+void start_server(int port, Stream *espSerial, String serial, String name);
 void query_url(String host, int port, String url, Stream *espSerial);

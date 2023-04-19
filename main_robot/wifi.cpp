@@ -49,7 +49,7 @@ int connect_wifi(String ssidName, String ssidPass, Stream *espSerial)
   return ret;
 }
 
-void start_server(int port, Stream *espSerial)
+void start_server(int port, Stream *espSerial, String serial, String name)
 {
   String data;
 
@@ -80,14 +80,16 @@ void start_server(int port, Stream *espSerial)
             Serial.print("SSID: " + ssid);
             Serial.println("PASS: " + pass);
 
+            Serial.println("Sending confirmation to client");
+            client.print(serial + "," + name + "");
+            delay(100);
+            client.stop();
+
+            WiFi.reset();
+
             if (connect_wifi(ssid, pass, espSerial) == WL_CONNECTED)
             {
-              client.write('OK');
               break;
-            }
-            else
-            {
-              client.write('KO');
             }
           }
         }
